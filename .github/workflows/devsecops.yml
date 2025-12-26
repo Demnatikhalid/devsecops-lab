@@ -43,6 +43,16 @@ jobs:
         run: docker build -t devsecops-api .
       
       ############################################
+      # Scan des dépendances Python
+      ############################################
+      - name: Install Safety
+        run: pip install safety
+
+      - name: Dependency vulnerability scan
+        run: safety check -r requirements.txt
+
+      
+      ############################################
       # 4. Scan Docker avec Trivy
       ############################################
       - name: Trivy Scan
